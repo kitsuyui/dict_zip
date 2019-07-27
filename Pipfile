@@ -17,3 +17,7 @@ python_version = "3.7"
 
 [pipenv]
 allow_prereleases = true
+
+[scripts]
+test = "python3 -m unittest discover"
+lint = "flake8 dict_zip tests"
