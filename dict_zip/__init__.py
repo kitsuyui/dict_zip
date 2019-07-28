@@ -12,11 +12,11 @@ def dict_zip(*dictionaries):
     }
 
 
-def dict_zip_longest(*dictionaries):
+def dict_zip_longest(*dictionaries, fillvalue=None):
     common_keys = functools.reduce(lambda x, y: x | y,
                                    (set(d.keys()) for d in dictionaries),
                                    set())
     return {
-        key: tuple(d.get(key) for d in dictionaries)
+        key: tuple(d.get(key, fillvalue) for d in dictionaries)
         for key in common_keys
     }
