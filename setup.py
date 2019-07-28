@@ -18,6 +18,7 @@ setup(
     },
     package_data={
         '': ['README.md', 'LICENSE'],
+        'dict_zip': ['py.typed'],
     },
     install_requires=[],
     extras_require={},
