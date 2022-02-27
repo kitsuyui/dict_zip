@@ -1,0 +1,34 @@
+name: Code coverage
+
+on: [pull_request]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install pipenv
+        run: pipx install pipenv
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+          cache: "pipenv"
+          architecture: "x64"
+
+      - name: Install dependencies
+        run: pipenv sync --dev
+
+      - name: Run Test
+        run: |
+          pipenv run coverage run -m unittest discover
+          pipenv run coverage report -m
+
+      - uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./.coverage
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: true
+          verbose: true
