@@ -10,6 +10,7 @@ isort = "*"
 rope = "*"
 black = "*"
 typing-extensions = "*"
+coverage = "*"
 
 [packages]
 
