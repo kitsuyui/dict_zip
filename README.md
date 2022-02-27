@@ -2,7 +2,6 @@
 
 zip and zip_longest for dict.
 
-[![CircleCI](https://circleci.com/gh/kitsuyui/dict_zip.svg?style=svg)](https://circleci.com/gh/kitsuyui/dict_zip)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![PyPI version shields.io](https://img.shields.io/pypi/v/dict-zip.svg)](https://pypi.python.org/pypi/dict-zip/)
 
