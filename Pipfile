@@ -9,6 +9,7 @@ flake8 = "*"
 isort = "*"
 rope = "*"
 black = "*"
+typing-extensions = "*"
 
 [packages]
 
