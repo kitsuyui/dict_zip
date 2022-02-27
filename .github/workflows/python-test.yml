@@ -1,0 +1,37 @@
+name: Lint and Test Python
+
+on: [pull_request]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ["3.7", "3.8", "3.9", "3.10"]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install pipenv
+        run: pipx install pipenv
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "${{ matrix.node }}"
+          cache: "pipenv"
+          architecture: "x64"
+
+      - name: Get Python version
+        run: pipenv run python -V
+
+      - name: Install dependencies
+        run: pipenv sync --dev
+
+      - name: Run Lint
+        run: pipenv run lint
+
+      - name: Run Test
+        run: pipenv run test
+
+      - name: Dry Run Install
+        run: |
+          pipenv run python setup.py build
+          pipenv run python setup.py install --dry-run
