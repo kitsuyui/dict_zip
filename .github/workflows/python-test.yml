@@ -30,3 +30,8 @@ jobs:
 
       - name: Run Test
         run: pipenv run test
+
+      - name: Dry Run Install
+        run: |
+          pipenv run python setup.py build
+          pipenv run python setup.py install --dry-run
