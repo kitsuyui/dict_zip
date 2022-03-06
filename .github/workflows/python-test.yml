@@ -1,6 +1,6 @@
 name: Lint and Test Python
 
-on: [pull_request]
+on: [push]
 jobs:
   lint:
     runs-on: ubuntu-latest
