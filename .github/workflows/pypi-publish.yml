@@ -1,12 +1,9 @@
 name: Upload PyPI package release
 
 on:
-  push:
-    branches:
-      - master
   release:
-    types:
-      - created
+    # "released" events are emitted either when directly be released or be edited from pre-released.
+    types: [prereleased, released]
 
 jobs:
   deploy:
@@ -30,9 +27,17 @@ jobs:
       - name: Build
         run: |
           python3 setup.py sdist --formats=zip
+          python3 setup.py check
 
-      - name: Publish a Python distribution to PyPI
-        if: startsWith(github.event.ref, 'refs/tags') || github.event_name == 'release'
+      - name: Publish distribution to Test PyPI
+        uses: pypa/gh-action-pypi-publish@master && github.event.release.prerelease
+        with:
+          user: __token__
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          repository_url: https://test.pypi.org/legacy/
+
+      - name: Publish distribution to PyPI
+        if: github.event_name == 'release' && !github.event.release.prerelease
         uses: pypa/gh-action-pypi-publish@master
         with:
           user: __token__
