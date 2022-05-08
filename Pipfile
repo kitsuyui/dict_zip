@@ -20,6 +20,6 @@ coverage = "*"
 allow_prereleases = true
 
 [scripts]
-test = "python3 -m unittest discover"
+test = "sh -c 'python3 -m unittest discover && mypy tests/test_types.py'"
 lint = "sh -c 'flake8 dict_zip tests && mypy dict_zip'"
-generate_typestub = "sh -c 'python ./generate_type_stub.py | tee dict_zip/__init__.pyi && black dict_zip/__init__.pyi'"
+generate_typestub = "sh -c 'python ./generate_type_stub.py | tee dict_zip/__init__.pyi && isort dict_zip/__init__.pyi && black dict_zip/__init__.pyi'"
