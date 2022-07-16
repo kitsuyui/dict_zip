@@ -21,7 +21,7 @@ $ pip install dict-zip
 ```python
 >>> from dict_zip import dict_zip
 >>> dict_zip({'a': 1, 'b': 2}, {'a': 3, 'b': 4})
-{'b': (2, 4), 'a': (1, 3)}
+{'a': (1, 3), 'b': (2, 4)}
 ```
 
 ## dict_zip_longest
@@ -32,7 +32,7 @@ It fills with fillvalue (default: `None`) when argument dict doesn't have match 
 ```python
 >>> from dict_zip import dict_zip_longest
 >>> dict_zip_longest({'a': 1, 'b': 2, 'c': 4}, {'a': 3, 'b': 4})
-{'b': (2, 4), 'a': (1, 3), 'c': (4, None)}
+{'a': (1, 3), 'b': (2, 4), 'c': (4, None)}
 ```
 
 # LICENSE
