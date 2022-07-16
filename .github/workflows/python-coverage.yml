@@ -21,8 +21,7 @@ jobs:
 
       - name: Run Test
         run: |
-          pipenv run coverage run -m unittest discover
-          pipenv run coverage xml
+          pipenv run coverage --cov-report=xml
 
       - uses: codecov/codecov-action@v3
         with:

@@ -10,7 +10,8 @@ isort = "*"
 rope = "*"
 black = "*"
 typing-extensions = "*"
-coverage = "*"
+pytest = "*"
+pytest-cov = "*"
 
 [packages]
 
@@ -20,6 +21,7 @@ coverage = "*"
 allow_prereleases = true
 
 [scripts]
-test = "sh -c 'python3 -m unittest discover && mypy tests/test_types.py'"
+test = "sh -c 'pytest tests && mypy tests/test_types.py'"
 lint = "sh -c 'flake8 dict_zip tests && mypy dict_zip'"
+coverage = "pytest --cov=dict_zip tests"
 generate_typestub = "sh -c 'python ./generate_type_stub.py | tee dict_zip/__init__.pyi && isort dict_zip/__init__.pyi && black dict_zip/__init__.pyi'"
