@@ -36,6 +36,12 @@ It fills with fillvalue (default: `None`) when argument dict doesn't have match 
 {'a': (1, 3), 'b': (2, 4), 'c': (4, None)}
 ```
 
+# Type hints
+
+dict_zip supports for type hints.
+
+<img width="535" alt="screen-shot-of-type-hints" src="https://user-images.githubusercontent.com/2596972/181838389-2860e45c-b366-41e4-83a1-f747b7115a5f.png">
+
 # LICENSE
 
 The 3-Clause BSD License. See also LICENSE file.
