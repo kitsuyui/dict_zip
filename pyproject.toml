@@ -1,3 +1,6 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools",  "setuptools_scm"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+write_to = "dict_zip/_version.py"
