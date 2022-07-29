@@ -2,7 +2,7 @@
 lint: flake8 mypy check_import_order check_format
 
 .PHONY: test
-test: pytest test_types
+test: pytest test_type_stubs test_types
 
 .PHONY: format
 format: isort black
@@ -41,6 +41,10 @@ check_format:
 .PHONY: test_types
 test_types:
 	mypy tests/test_types.py
+
+.PHONY: test_type_stubs
+test_type_stubs: generate_type_stub
+	python -m mypy.stubtest dict_zip
 
 .PHONY: pytest
 pytest:
