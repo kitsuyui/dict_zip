@@ -7,4 +7,4 @@ def test_addition() -> None:
 
 def test_exception() -> None:
     with pytest.raises(ValueError):
-        raise ValueError('Hello Error!')
+        raise ValueError("Hello Error!")
