@@ -7,13 +7,12 @@ verify_ssl = true
 mypy = "*"
 flake8 = "*"
 isort = "*"
-rope = "*"
 black = "*"
-typing-extensions = "*"
 pytest = "*"
 pytest-cov = "*"
 build = "*"
 setuptools-scm = "*"
+typing-extensions = "*"
 
 [packages]
 

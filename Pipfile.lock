@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b7022693254ba5ea32dbddfdeeac79a5a544cbdc5f2b1b71f31b30861d4bb042"
+            "sha256": "600254706c3a8078d59b1491d89811febf1d694d15c7249112223c954296520e"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -271,22 +271,6 @@
             "index": "pypi",
             "version": "==3.0.0"
         },
-        "pytoolconfig": {
-            "hashes": [
-                "sha256:5ac82f78d731531f9f82e5cc7f5ebae9473b1404c0e75aa5ac0b8b41cd99b510",
-                "sha256:5f291567f0363a7314406be4f2381ece4e552a8608d2629544679e4d36d0df2b"
-            ],
-            "markers": "python_version >= '3.7'",
-            "version": "==1.2.1"
-        },
-        "rope": {
-            "hashes": [
-                "sha256:4e8ede637d8f43eb83847ef9ea7edbf4ceb9d641deea592ed38a8875cde64265",
-                "sha256:f0c82bd7167c2926339c6f0d9ecf7c93d6866cbe380c78639fa1bc4ac037c097"
-            ],
-            "index": "pypi",
-            "version": "==1.3.0"
-        },
         "setuptools": {
             "hashes": [
                 "sha256:0d33c374d41c7863419fc8f6c10bfe25b7b498aa34164d135c622e52580c6b16",
@@ -308,7 +292,7 @@
                 "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc",
                 "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"
             ],
-            "markers": "python_version >= '3.7'",
+            "markers": "python_version < '3.11'",
             "version": "==2.0.1"
         },
         "typing-extensions": {
