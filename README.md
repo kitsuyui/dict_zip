@@ -2,6 +2,7 @@
 
 zip and zip_longest for dict.
 
+[![Python](https://img.shields.io/pypi/pyversions/dict-zip.svg)](https://badge.fury.io/py/dict-zip)
 [![codecov](https://codecov.io/gh/kitsuyui/dict_zip/branch/master/graph/badge.svg?token=LiuhQeZsnc)](https://codecov.io/gh/kitsuyui/dict_zip)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![PyPI version shields.io](https://img.shields.io/pypi/v/dict-zip.svg)](https://pypi.python.org/pypi/dict-zip/)
