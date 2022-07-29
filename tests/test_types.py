@@ -6,6 +6,7 @@ d1: Dict[str, int] = {"a": 1, "b": 2, "c": 3}
 d2: Dict[str, int] = {"a": 4, "b": 5}
 d3: Dict[str, int] = {"b": 6, "c": 7}
 d4: Dict[str, float] = {"b": 6.0, "c": 7.0}
+d5: Dict[str, float] = {"b": 6.0, "c": 7.0, "d": 8.0}
 
 t1 = dict_zip(d1, d2)
 t1_: Dict[str, Tuple[int, int]] = t1
