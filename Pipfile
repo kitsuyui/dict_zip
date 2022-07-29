@@ -12,6 +12,7 @@ black = "*"
 typing-extensions = "*"
 pytest = "*"
 pytest-cov = "*"
+build = "*"
 
 [packages]
 

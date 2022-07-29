@@ -20,7 +20,7 @@ jobs:
           architecture: "x64"
 
       - name: Get Python version
-        run: pipenv run python -V
+        run: pipenv run python3 -V
 
       - name: Install dependencies
         run: pipenv sync --dev
@@ -33,5 +33,5 @@ jobs:
 
       - name: Dry Run Install
         run: |
-          pipenv run python setup.py build
-          pipenv run python setup.py install --dry-run
+          pipenv run python3 -m build .
+          pipenv run python3 -m pip install dist/*.whl
