@@ -2,7 +2,7 @@ name: Lint and Test Python
 
 on: [push]
 jobs:
-  lint:
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -10,28 +10,33 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install pipenv
-        run: pipx install pipenv
-
       - uses: actions/setup-python@v4
         with:
           python-version: "${{ matrix.node }}"
           cache: "pipenv"
-          architecture: "x64"
 
-      - name: Get Python version
-        run: pipenv run python -V
+      - run: pipx install pipenv
 
-      - name: Install dependencies
-        run: pipenv sync --dev
+      - run: pipenv sync --dev
 
-      - name: Run Lint
+      - name: Lint
         run: pipenv run lint
 
-      - name: Run Test
+      - name: Test
         run: pipenv run test
 
-      - name: Dry Run Install
+      - name: Upload coverage report to Codecov
+        if: matrix.node-version == '3.10'
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.xml
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: true
+          verbose: true
+
+      - name: Packaging
         run: |
-          pipenv run python setup.py build
-          pipenv run python setup.py install --dry-run
+          pipenv run build
+          pipenv run test_install

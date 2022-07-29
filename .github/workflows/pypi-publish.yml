@@ -11,23 +11,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install pipenv
-        run: pipx install pipenv
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - uses: actions/setup-python@v4
         with:
           python-version: "3.x"
           cache: "pipenv"
-          architecture: "x64"
 
-      - name: Install dependencies
-        run: pipenv sync --dev
+      - run: pipx install pipenv
+
+      - run: pipenv sync --dev
 
       - name: Build
         run: |
-          python3 setup.py sdist --formats=zip
-          python3 setup.py check
+          pipenv run python3 -m build .
+          pipenv run python3 -m pip install dist/*.whl
 
       - name: Publish distribution to Test PyPI
         uses: pypa/gh-action-pypi-publish@master
