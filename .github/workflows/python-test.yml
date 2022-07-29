@@ -42,4 +42,4 @@ jobs:
       - name: Packaging
         run: |
           pipenv run python3 -m build .
-          pipenv run python3 -m pip install dist/*.whl
+          ./test_installation.sh
