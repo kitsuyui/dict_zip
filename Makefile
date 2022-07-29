@@ -45,3 +45,11 @@ test_types:
 .PHONY: pytest
 pytest:
 	pytest --cov=dict_zip tests --doctest-modules --cov-report=xml
+
+.PHONY: build
+build:
+	python3 -m build .
+
+.PHONY: clean
+clean:
+	rm -rf dict_zip.egg-info dist
