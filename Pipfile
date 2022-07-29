@@ -23,8 +23,8 @@ setuptools-scm = "*"
 allow_prereleases = true
 
 [scripts]
-test = "sh -c 'pytest tests --doctest-modules && mypy tests/test_types.py'"
-lint = "sh -c 'flake8 dict_zip tests && mypy dict_zip tests && isort --check-only --diff dict_zip tests && black --check dict_zip tests'"
-format = "sh -c 'isort dict_zip tests ; black dict_zip tests'"
-coverage = "pytest --cov=dict_zip tests --doctest-modules"
-generate_typestub = "sh -c 'python ./generate_type_stub.py | tee dict_zip/__init__.pyi && isort dict_zip/__init__.pyi && black dict_zip/__init__.pyi'"
+test = "make test"
+lint = "make lint"
+format = "make format"
+cover = "make coverage"
+generate_type_stub = "make generate_type_stub"

@@ -25,9 +25,6 @@ jobs:
       - name: Test
         run: pipenv run test
 
-      - name: Coverage
-        run: pipenv run coverage --cov-report=xml
-
       - name: Upload coverage report to Codecov
         if: matrix.node-version == '3.10'
         uses: codecov/codecov-action@v3
