@@ -39,4 +39,4 @@ jobs:
       - name: Packaging
         run: |
           pipenv run build
-          ./test_installation.sh
+          pipenv run test_install

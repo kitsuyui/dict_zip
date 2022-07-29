@@ -53,3 +53,7 @@ build:
 .PHONY: clean
 clean:
 	rm -rf dict_zip.egg-info dist
+
+.PHONY: test_install
+test_install: clean build
+	./scripts/test_install.sh
