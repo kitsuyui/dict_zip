@@ -1,4 +1,6 @@
-from typing import Optional, TypeVar, Union, overload
+from __future__ import annotations
+
+from typing import TypeVar, overload
 
 _K = TypeVar("_K")
 _Fill = TypeVar("_Fill")
@@ -83,38 +85,38 @@ def dict_zip(
 
 # type stubs for dict_zip_longest
 @overload
-def dict_zip_longest(dict1: dict[_K, _T1]) -> dict[_K, tuple[Optional[_T1]]]: ...
+def dict_zip_longest(dict1: dict[_K, _T1]) -> dict[_K, tuple[_T1 | None]]: ...
 @overload
 def dict_zip_longest(
-    dict1: dict[_K, _T1], *, fillvalue: Optional[_Fill] = None
-) -> dict[_K, tuple[Union[_T1, _Fill]]]: ...
+    dict1: dict[_K, _T1], *, fillvalue: _Fill | None = None
+) -> dict[_K, tuple[_T1 | _Fill]]: ...
 @overload
 def dict_zip_longest(
     dict1: dict[_K, _T1], dict2: dict[_K, _T2]
-) -> dict[_K, tuple[Optional[_T1], Optional[_T2]]]: ...
+) -> dict[_K, tuple[_T1 | None, _T2 | None]]: ...
 @overload
 def dict_zip_longest(
-    dict1: dict[_K, _T1], dict2: dict[_K, _T2], *, fillvalue: Optional[_Fill] = None
-) -> dict[_K, tuple[Union[_T1, _Fill], Union[_T2, _Fill]]]: ...
+    dict1: dict[_K, _T1], dict2: dict[_K, _T2], *, fillvalue: _Fill | None = None
+) -> dict[_K, tuple[_T1 | _Fill, _T2 | _Fill]]: ...
 @overload
 def dict_zip_longest(
     dict1: dict[_K, _T1], dict2: dict[_K, _T2], dict3: dict[_K, _T3]
-) -> dict[_K, tuple[Optional[_T1], Optional[_T2], Optional[_T3]]]: ...
+) -> dict[_K, tuple[_T1 | None, _T2 | None, _T3 | None]]: ...
 @overload
 def dict_zip_longest(
     dict1: dict[_K, _T1],
     dict2: dict[_K, _T2],
     dict3: dict[_K, _T3],
     *,
-    fillvalue: Optional[_Fill] = None
-) -> dict[_K, tuple[Union[_T1, _Fill], Union[_T2, _Fill], Union[_T3, _Fill]]]: ...
+    fillvalue: _Fill | None = None,
+) -> dict[_K, tuple[_T1 | _Fill, _T2 | _Fill, _T3 | _Fill]]: ...
 @overload
 def dict_zip_longest(
     dict1: dict[_K, _T1],
     dict2: dict[_K, _T2],
     dict3: dict[_K, _T3],
     dict4: dict[_K, _T4],
-) -> dict[_K, tuple[Optional[_T1], Optional[_T2], Optional[_T3], Optional[_T4]]]: ...
+) -> dict[_K, tuple[_T1 | None, _T2 | None, _T3 | None, _T4 | None]]: ...
 @overload
 def dict_zip_longest(
     dict1: dict[_K, _T1],
@@ -122,11 +124,8 @@ def dict_zip_longest(
     dict3: dict[_K, _T3],
     dict4: dict[_K, _T4],
     *,
-    fillvalue: Optional[_Fill] = None
-) -> dict[
-    _K,
-    tuple[Union[_T1, _Fill], Union[_T2, _Fill], Union[_T3, _Fill], Union[_T4, _Fill]],
-]: ...
+    fillvalue: _Fill | None = None,
+) -> dict[_K, tuple[_T1 | _Fill, _T2 | _Fill, _T3 | _Fill, _T4 | _Fill]]: ...
 @overload
 def dict_zip_longest(
     dict1: dict[_K, _T1],
@@ -134,9 +133,7 @@ def dict_zip_longest(
     dict3: dict[_K, _T3],
     dict4: dict[_K, _T4],
     dict5: dict[_K, _T5],
-) -> dict[
-    _K, tuple[Optional[_T1], Optional[_T2], Optional[_T3], Optional[_T4], Optional[_T5]]
-]: ...
+) -> dict[_K, tuple[_T1 | None, _T2 | None, _T3 | None, _T4 | None, _T5 | None]]: ...
 @overload
 def dict_zip_longest(
     dict1: dict[_K, _T1],
@@ -145,16 +142,9 @@ def dict_zip_longest(
     dict4: dict[_K, _T4],
     dict5: dict[_K, _T5],
     *,
-    fillvalue: Optional[_Fill] = None
+    fillvalue: _Fill | None = None,
 ) -> dict[
-    _K,
-    tuple[
-        Union[_T1, _Fill],
-        Union[_T2, _Fill],
-        Union[_T3, _Fill],
-        Union[_T4, _Fill],
-        Union[_T5, _Fill],
-    ],
+    _K, tuple[_T1 | _Fill, _T2 | _Fill, _T3 | _Fill, _T4 | _Fill, _T5 | _Fill]
 ]: ...
 @overload
 def dict_zip_longest(
@@ -165,15 +155,7 @@ def dict_zip_longest(
     dict5: dict[_K, _T5],
     dict6: dict[_K, _T6],
 ) -> dict[
-    _K,
-    tuple[
-        Optional[_T1],
-        Optional[_T2],
-        Optional[_T3],
-        Optional[_T4],
-        Optional[_T5],
-        Optional[_T6],
-    ],
+    _K, tuple[_T1 | None, _T2 | None, _T3 | None, _T4 | None, _T5 | None, _T6 | None]
 ]: ...
 @overload
 def dict_zip_longest(
@@ -184,17 +166,10 @@ def dict_zip_longest(
     dict5: dict[_K, _T5],
     dict6: dict[_K, _T6],
     *,
-    fillvalue: Optional[_Fill] = None
+    fillvalue: _Fill | None = None,
 ) -> dict[
     _K,
-    tuple[
-        Union[_T1, _Fill],
-        Union[_T2, _Fill],
-        Union[_T3, _Fill],
-        Union[_T4, _Fill],
-        Union[_T5, _Fill],
-        Union[_T6, _Fill],
-    ],
+    tuple[_T1 | _Fill, _T2 | _Fill, _T3 | _Fill, _T4 | _Fill, _T5 | _Fill, _T6 | _Fill],
 ]: ...
 @overload
 def dict_zip_longest(
@@ -208,13 +183,13 @@ def dict_zip_longest(
 ) -> dict[
     _K,
     tuple[
-        Optional[_T1],
-        Optional[_T2],
-        Optional[_T3],
-        Optional[_T4],
-        Optional[_T5],
-        Optional[_T6],
-        Optional[_T7],
+        _T1 | None,
+        _T2 | None,
+        _T3 | None,
+        _T4 | None,
+        _T5 | None,
+        _T6 | None,
+        _T7 | None,
     ],
 ]: ...
 @overload
@@ -227,17 +202,17 @@ def dict_zip_longest(
     dict6: dict[_K, _T6],
     dict7: dict[_K, _T7],
     *,
-    fillvalue: Optional[_Fill] = None
+    fillvalue: _Fill | None = None,
 ) -> dict[
     _K,
     tuple[
-        Union[_T1, _Fill],
-        Union[_T2, _Fill],
-        Union[_T3, _Fill],
-        Union[_T4, _Fill],
-        Union[_T5, _Fill],
-        Union[_T6, _Fill],
-        Union[_T7, _Fill],
+        _T1 | _Fill,
+        _T2 | _Fill,
+        _T3 | _Fill,
+        _T4 | _Fill,
+        _T5 | _Fill,
+        _T6 | _Fill,
+        _T7 | _Fill,
     ],
 ]: ...
 @overload
@@ -253,14 +228,14 @@ def dict_zip_longest(
 ) -> dict[
     _K,
     tuple[
-        Optional[_T1],
-        Optional[_T2],
-        Optional[_T3],
-        Optional[_T4],
-        Optional[_T5],
-        Optional[_T6],
-        Optional[_T7],
-        Optional[_T8],
+        _T1 | None,
+        _T2 | None,
+        _T3 | None,
+        _T4 | None,
+        _T5 | None,
+        _T6 | None,
+        _T7 | None,
+        _T8 | None,
     ],
 ]: ...
 @overload
@@ -274,18 +249,18 @@ def dict_zip_longest(
     dict7: dict[_K, _T7],
     dict8: dict[_K, _T8],
     *,
-    fillvalue: Optional[_Fill] = None
+    fillvalue: _Fill | None = None,
 ) -> dict[
     _K,
     tuple[
-        Union[_T1, _Fill],
-        Union[_T2, _Fill],
-        Union[_T3, _Fill],
-        Union[_T4, _Fill],
-        Union[_T5, _Fill],
-        Union[_T6, _Fill],
-        Union[_T7, _Fill],
-        Union[_T8, _Fill],
+        _T1 | _Fill,
+        _T2 | _Fill,
+        _T3 | _Fill,
+        _T4 | _Fill,
+        _T5 | _Fill,
+        _T6 | _Fill,
+        _T7 | _Fill,
+        _T8 | _Fill,
     ],
 ]: ...
 @overload
@@ -302,15 +277,15 @@ def dict_zip_longest(
 ) -> dict[
     _K,
     tuple[
-        Optional[_T1],
-        Optional[_T2],
-        Optional[_T3],
-        Optional[_T4],
-        Optional[_T5],
-        Optional[_T6],
-        Optional[_T7],
-        Optional[_T8],
-        Optional[_T9],
+        _T1 | None,
+        _T2 | None,
+        _T3 | None,
+        _T4 | None,
+        _T5 | None,
+        _T6 | None,
+        _T7 | None,
+        _T8 | None,
+        _T9 | None,
     ],
 ]: ...
 @overload
@@ -325,18 +300,18 @@ def dict_zip_longest(
     dict8: dict[_K, _T8],
     dict9: dict[_K, _T9],
     *,
-    fillvalue: Optional[_Fill] = None
+    fillvalue: _Fill | None = None,
 ) -> dict[
     _K,
     tuple[
-        Union[_T1, _Fill],
-        Union[_T2, _Fill],
-        Union[_T3, _Fill],
-        Union[_T4, _Fill],
-        Union[_T5, _Fill],
-        Union[_T6, _Fill],
-        Union[_T7, _Fill],
-        Union[_T8, _Fill],
-        Union[_T9, _Fill],
+        _T1 | _Fill,
+        _T2 | _Fill,
+        _T3 | _Fill,
+        _T4 | _Fill,
+        _T5 | _Fill,
+        _T6 | _Fill,
+        _T7 | _Fill,
+        _T8 | _Fill,
+        _T9 | _Fill,
     ],
 ]: ...
