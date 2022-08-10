@@ -2,7 +2,6 @@ NUMBER_OF_ITERATORS = 10
 
 print("""\
 from typing import (
-    Any,
     Optional,
     overload,
     TypeVar,

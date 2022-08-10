@@ -1,4 +1,4 @@
-from typing import Any, Optional, TypeVar, Union, overload
+from typing import Optional, TypeVar, Union, overload
 
 _K = TypeVar("_K")
 _Fill = TypeVar("_Fill")
