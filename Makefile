@@ -5,10 +5,10 @@ lint: flake8 mypy check_import_order check_format
 test: pytest test_type_stubs test_types
 
 .PHONY: format
-format: isort black
+format: isort black pyupgrade
 
 .PHONY: generate_type_stub
-generate_type_stub: generate_type_stub_pre format
+generate_type_stub: generate_type_stub_pre format pyupgrade
 
 .PHONY: generate_type_stub_pre
 generate_type_stub_pre:
@@ -25,6 +25,10 @@ black:
 .PHONY: flake8
 flake8:
 	flake8 dict_zip tests
+
+.PHONY: pyupgrade
+pyupgrade:
+	pyupgrade --py37-plus dict_zip/*.py dict_zip/*.pyi tests/*.py
 
 .PHONY: mypy
 mypy:
