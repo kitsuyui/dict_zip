@@ -15,6 +15,7 @@ setuptools-scm = "*"
 typing-extensions = "*"
 pyupgrade = "*"
 importlib-metadata = {version = "*", python = "<3.8"}
+colorama = "*"
 
 [packages]
 
