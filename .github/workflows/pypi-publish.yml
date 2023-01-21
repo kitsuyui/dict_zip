@@ -1,6 +1,7 @@
-name: Upload PyPI package release
+name: Packaging
 
 on:
+  push:
   release:
     # "released" events are emitted either when directly be released or be edited from pre-released.
     types: [prereleased, released]
@@ -11,19 +12,30 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/setup-python@v4
+      - name: Set up Python
+        id: setup-python
+        uses: actions/setup-python@v4
         with:
-          python-version: "3.x"
-          cache: "pipenv"
+          python-version: "3.11"
 
-      - run: pipx install pipenv
+      - name: Set up poetry
+        uses: abatilo/actions-poetry@v2
 
-      - run: pipenv sync --dev
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pypoetry/virtualenvs
+          key: ${{ runner.os }}-build-${{ matrix.python }}-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ matrix.python }}-${{ hashFiles('**/poetry.lock') }}
+            ${{ runner.os }}-build-${{ matrix.python }}-
+            ${{ runner.os }}-
+
+      - run: poetry install
 
       - name: Build
-        run: |
-          pipenv run python3 -m build .
-          pipenv run python3 -m pip install dist/*.whl
+        # I use poetry just as a package manager, so this is not `poetry build`
+        run: poetry run poe build
 
       - name: Publish distribution to Test PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
