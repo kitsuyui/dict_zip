@@ -1,4 +1,4 @@
-name: Lint and Test Python
+name: Test
 on: [push]
 
 jobs:
@@ -18,36 +18,29 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "${{ matrix.python }}"
-          cache: pipenv
 
-      - name: Install pipenv
-        run: |
-          python -m pip install pipenv
-          pipenv --python "${{ matrix.python }}"
+      - name: Set up poetry
+        uses: abatilo/actions-poetry@v2
 
       - name: Cache
-        id: cache-python
         uses: actions/cache@v3
         with:
-          path: ~/.local/share/virtualenvs
-          key: ${{ runner.os }}-build-${{ matrix.python }}-${{ hashFiles('**/Pipfile.lock') }}
+          path: ~/.cache/pypoetry/virtualenvs
+          key: ${{ runner.os }}-build-${{ matrix.python }}-${{ hashFiles('**/poetry.lock') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ matrix.python }}-${{ hashFiles('**/Pipfile.lock') }}
+            ${{ runner.os }}-build-${{ matrix.python }}-${{ hashFiles('**/poetry.lock') }}
             ${{ runner.os }}-build-${{ matrix.python }}-
             ${{ runner.os }}-
 
-      - if: ${{ steps.cache-python.outputs.cache-hit != 'true' }}
-        name: Install dependencies
-        run: |
-          pipenv sync --dev
-          pipenv clean
+      - name: Install dependencies
+        run: poetry install
 
       - name: Lint
-        run: pipenv run lint
+        run: poetry run poe check
 
       - name: Check Python version
         run: |
-          actual_version=$(pipenv run python --version)
+          actual_version=$(poetry run python --version)
           expected_version="Python ${{ matrix.python }}"
           if [ "$actual_version" == *"$expected_version"* ]; then
             echo "Expected $expected_version, but got $actual_version"
@@ -55,7 +48,10 @@ jobs:
           fi
 
       - name: Test
-        run: pipenv run pytest --cov=dict_zip tests --doctest-modules --cov-report=xml
+        run: poetry run poe test
+
+      - name: Coverage
+        run: poetry run poe coverage-xml
 
       - name: Upload coverage report to Codecov
         if: matrix.python == '3.11'
@@ -67,8 +63,3 @@ jobs:
           name: codecov-umbrella
           fail_ci_if_error: true
           verbose: true
-
-      - name: Packaging
-        run: |
-          pipenv run build
-          pipenv run test_install

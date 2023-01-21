@@ -96,7 +96,10 @@ def dict_zip_longest(
 ) -> dict[_K, tuple[_T1 | None, _T2 | None]]: ...
 @overload
 def dict_zip_longest(
-    dict1: dict[_K, _T1], dict2: dict[_K, _T2], *, fillvalue: _Fill | None = None
+    dict1: dict[_K, _T1],
+    dict2: dict[_K, _T2],
+    *,
+    fillvalue: _Fill | None = None,
 ) -> dict[_K, tuple[_T1 | _Fill, _T2 | _Fill]]: ...
 @overload
 def dict_zip_longest(
@@ -133,7 +136,9 @@ def dict_zip_longest(
     dict3: dict[_K, _T3],
     dict4: dict[_K, _T4],
     dict5: dict[_K, _T5],
-) -> dict[_K, tuple[_T1 | None, _T2 | None, _T3 | None, _T4 | None, _T5 | None]]: ...
+) -> dict[
+    _K, tuple[_T1 | None, _T2 | None, _T3 | None, _T4 | None, _T5 | None]
+]: ...
 @overload
 def dict_zip_longest(
     dict1: dict[_K, _T1],
@@ -155,7 +160,10 @@ def dict_zip_longest(
     dict5: dict[_K, _T5],
     dict6: dict[_K, _T6],
 ) -> dict[
-    _K, tuple[_T1 | None, _T2 | None, _T3 | None, _T4 | None, _T5 | None, _T6 | None]
+    _K,
+    tuple[
+        _T1 | None, _T2 | None, _T3 | None, _T4 | None, _T5 | None, _T6 | None
+    ],
 ]: ...
 @overload
 def dict_zip_longest(
@@ -169,7 +177,14 @@ def dict_zip_longest(
     fillvalue: _Fill | None = None,
 ) -> dict[
     _K,
-    tuple[_T1 | _Fill, _T2 | _Fill, _T3 | _Fill, _T4 | _Fill, _T5 | _Fill, _T6 | _Fill],
+    tuple[
+        _T1 | _Fill,
+        _T2 | _Fill,
+        _T3 | _Fill,
+        _T4 | _Fill,
+        _T5 | _Fill,
+        _T6 | _Fill,
+    ],
 ]: ...
 @overload
 def dict_zip_longest(
