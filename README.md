@@ -6,6 +6,7 @@ zip and zip_longest for dict.
 [![PyPI version](https://img.shields.io/pypi/v/dict-zip.svg)](https://pypi.python.org/pypi/dict-zip/)
 [![codecov](https://codecov.io/gh/kitsuyui/dict_zip/branch/main/graph/badge.svg?token=LiuhQeZsnc)](https://codecov.io/gh/kitsuyui/dict_zip)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![dict-zip](/advisor/python/dict-zip/badge.svg)](/advisor/python/dict-zip)
 
 # Installation
 
