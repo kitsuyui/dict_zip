@@ -15,7 +15,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
 
 [tool.poetry.group.dev.dependencies]
 black = "*"
@@ -45,7 +45,7 @@ generate-type-stubs = { shell = "python generate_type_stub.py > dict_zip/__init_
 format = [
     { cmd = "isort dict_zip"},
     { cmd = "black dict_zip"},
-    { cmd = "pyupgrade --py37-plus dict_zip/*.py"},
+    { cmd = "pyupgrade --py38-plus dict_zip/*.py"},
 ]
 check = [
     { cmd = "isort --check-only --diff dict_zip"},
