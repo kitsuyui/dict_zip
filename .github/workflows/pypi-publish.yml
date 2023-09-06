@@ -7,6 +7,9 @@ on:
     # "released" events are emitted either when directly be released or be edited from pre-released.
     types: [prereleased, released]
 
+env:
+  python_version: 3.11
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -17,7 +20,7 @@ jobs:
         id: setup-python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: ${{ env.python_version }}
 
       - name: Set up poetry
         uses: abatilo/actions-poetry@v2
@@ -26,10 +29,10 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.cache/pypoetry/virtualenvs
-          key: ${{ runner.os }}-build-${{ matrix.python }}-${{ hashFiles('**/poetry.lock') }}
+          key: ${{ runner.os }}-build-${{ env.python_version }}-${{ hashFiles('**/poetry.lock') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ matrix.python }}-${{ hashFiles('**/poetry.lock') }}
-            ${{ runner.os }}-build-${{ matrix.python }}-
+            ${{ runner.os }}-build-${{ env.python_version }}-${{ hashFiles('**/poetry.lock') }}
+            ${{ runner.os }}-build-${{ env.python_version }}-
             ${{ runner.os }}-
 
       - run: poetry install
