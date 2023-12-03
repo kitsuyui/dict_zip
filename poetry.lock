@@ -190,13 +190,13 @@ pyflakes = ">=2.5.0,<2.6.0"
 
 [[package]]
 name = "importlib-metadata"
-version = "6.10.0"
+version = "7.0.0"
 description = "Read metadata from Python packages"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "importlib_metadata-6.10.0-py3-none-any.whl", hash = "sha256:4552f51d852a2b73153ca17167add744874c71f9fed5cd641d043923cd7b17fd"},
-    {file = "importlib_metadata-6.10.0.tar.gz", hash = "sha256:790dcaa833b76d59f1444cc6e2fec9ed09df1c12ea3ac499f478b7f33b9a5b0c"},
+    {file = "importlib_metadata-7.0.0-py3-none-any.whl", hash = "sha256:d97503976bb81f40a193d41ee6570868479c69d5068651eb039c40d850c59d67"},
+    {file = "importlib_metadata-7.0.0.tar.gz", hash = "sha256:7fc841f8b8332803464e5dc1c63a2e59121f46ca186c0e2e182e80bf8c1319f7"},
 ]
 
 [package.dependencies]
