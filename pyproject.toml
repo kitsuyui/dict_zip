@@ -1,4 +1,4 @@
-[tool.black]
+[tool.ruff]
 line-length = 79
 
 [tool.poetry]
@@ -10,29 +10,21 @@ name = "dict_zip"
 version = "0.0.0"
 description = ""
 authors = []
-packages = [
-    { include = "dict_zip" },
-]
+packages = [{ include = "dict_zip" }]
 
 [tool.poetry.dependencies]
 python = "^3.8"
 
 [tool.poetry.group.dev.dependencies]
-black = "*"
 pytest = "*"
-isort = "*"
-pyupgrade = "*"
 pytest-cov = "*"
-flake8 = "*"
-mypy = "*"
 poethepoet = "*"
 setuptools-scm = "*"
 build = "*"
+ruff = "*"
 
 [build-system]
-requires = [
-    "setuptools", "setuptools_scm"
-]
+requires = ["setuptools", "setuptools_scm"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
@@ -41,21 +33,10 @@ write_to = "dict_zip/_version.py"
 [tool.poe.tasks]
 test = "pytest"
 coverage-xml = "pytest --cov=dict_zip --doctest-modules --cov-report=xml"
-generate-type-stubs = { shell = "python generate_type_stub.py > dict_zip/__init__.pyi"}
-format = [
-    { cmd = "isort dict_zip"},
-    { cmd = "black dict_zip"},
-    { cmd = "pyupgrade --py38-plus dict_zip/*.py"},
-]
-check = [
-    { cmd = "isort --check-only --diff dict_zip"},
-    { cmd = "black --check --diff dict_zip"},
-    { cmd = "flake8 dict_zip"},
-    { cmd = "mypy dict_zip"},
-]
-build = [
-    { cmd = "python -m build"}
-]
+generate-type-stubs = { shell = "python generate_type_stub.py > dict_zip/__init__.pyi" }
+format = "ruff format dict_zip tests"
+check = "ruff check dict_zip tests"
+build = [{ cmd = "python -m build" }]
 
 [tool.mypy]
 # https://mypy.readthedocs.io/en/latest/config_file.html
