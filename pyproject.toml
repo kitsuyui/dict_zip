@@ -22,6 +22,7 @@ poethepoet = "*"
 setuptools-scm = "*"
 build = "*"
 ruff = "*"
+mypy = "*"
 
 [build-system]
 requires = ["setuptools", "setuptools_scm"]
@@ -35,7 +36,10 @@ test = "pytest"
 coverage-xml = "pytest --cov=dict_zip --doctest-modules --cov-report=xml"
 generate-type-stubs = { shell = "python generate_type_stub.py > dict_zip/__init__.pyi" }
 format = "ruff format dict_zip tests"
-check = "ruff check dict_zip tests"
+check = [
+    { cmd = "ruff check dict_zip tests" },
+    { cmd = "mypy dict_zip tests" },
+]
 build = [{ cmd = "python -m build" }]
 
 [tool.mypy]
