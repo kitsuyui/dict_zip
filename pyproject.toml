@@ -1,32 +1,49 @@
-[tool.ruff]
-line-length = 79
-
-[tool.poetry]
-# I use poetry as just a package manager.
-# So, I only write the settings that poetry needs.
-# The actual package metadata is written in setup.cfg.
-# I use pypa/build for packaging.
+[project]
 name = "dict_zip"
 version = "0.0.0"
-description = ""
-authors = []
-packages = [{ include = "dict_zip" }]
+requires-python = ">=3.9"
+dependencies = []
+description = "ip and zip_longest for dict"
+readme = {file = "README.md", content-type = "text/markdown"}
+license = { file = "LICENSE" }
+authors = [
+    {name = "Yui KITSU", email = "kitsuyui+github@kitsuyui.com"}
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries",
+]
+[project.urls]
+Homepage = "https://github.com/kitsuyui/dict_zip"
 
-[tool.poetry.dependencies]
-python = "^3.9"
+[tool.uv]
+dev-dependencies = [
+    "pytest",
+    "pytest-cov",
+    "poethepoet",
+    "setuptools-scm",
+    "build",
+    "ruff",
+    "mypy",
+]
 
-[tool.poetry.group.dev.dependencies]
-pytest = "*"
-pytest-cov = "*"
-poethepoet = "*"
-setuptools-scm = "*"
-build = "*"
-ruff = "*"
-mypy = "*"
+[tool.ruff]
+line-length = 79
 
 [build-system]
 requires = ["setuptools", "setuptools_scm"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-data = { "dict_zip" = ["py.typed"], "*" = ["README.md, LICENSE"] }
+package-dir = { "dict_zip" = "dict_zip" }
 
 [tool.setuptools_scm]
 write_to = "dict_zip/_version.py"
