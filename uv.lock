@@ -86,7 +86,7 @@ toml = [
 
 [[package]]
 name = "dict-zip"
-version = "0.6.1.dev0+g01ae231.d20250109"
+version = "0.5.1.dev51+g9ddf0b8.d20250109"
 source = { editable = "." }
 
 [package.dev-dependencies]
