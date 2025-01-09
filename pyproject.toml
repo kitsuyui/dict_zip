@@ -46,6 +46,7 @@ package-dir = { "dict_zip" = "dict_zip" }
 
 [tool.setuptools_scm]
 write_to = "dict_zip/_version.py"
+version_scheme = "only-version"
 
 [tool.poe.tasks]
 test = "pytest"
