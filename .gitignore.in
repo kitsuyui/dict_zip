@@ -8,3 +8,4 @@ gibo dump Windows
 gibo dump macOS
 gibo dump Python
 echo '_version.py'
+echo '.python-version'
