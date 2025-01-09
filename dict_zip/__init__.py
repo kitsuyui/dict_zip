@@ -15,6 +15,9 @@ Example:
 
 import functools
 
+# https://packaging-guide.openastronomy.org/en/latest/advanced/versioning.html
+from ._version import __version__
+
 
 def dict_zip(*dictionaries):
     """Returns a new dictionary \
@@ -68,3 +71,6 @@ def __all_keys(iterables):
                 continue
             keys.append(key)
     return keys
+
+
+__all__ = ["dict_zip", "dict_zip_longest", "__version__"]
