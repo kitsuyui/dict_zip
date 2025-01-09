@@ -1,6 +1,6 @@
 [project]
 name = "dict_zip"
-dynamic = ["version"]
+version = "0.0.0"
 requires-python = ">=3.9"
 dependencies = []
 description = "ip and zip_longest for dict"
@@ -29,6 +29,7 @@ dev-dependencies = [
     "pytest-cov",
     "poethepoet",
     "setuptools-scm",
+    "build",
     "ruff",
     "mypy",
 ]
@@ -56,6 +57,7 @@ check = [
     { cmd = "ruff check dict_zip tests" },
     { cmd = "mypy dict_zip tests" },
 ]
+build = [{ cmd = "python -m build" }]
 
 [tool.mypy]
 # https://mypy.readthedocs.io/en/latest/config_file.html
