@@ -16,30 +16,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        id: setup-python
-        uses: actions/setup-python@v5
+      - name: Enable caching
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: ${{ env.python_version }}
+          enable-cache: true
 
-      - name: Set up poetry
-        uses: abatilo/actions-poetry@v4
-
-      - name: Cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pypoetry/virtualenvs
-          key: ${{ runner.os }}-build-${{ env.python_version }}-${{ hashFiles('**/poetry.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.python_version }}-${{ hashFiles('**/poetry.lock') }}
-            ${{ runner.os }}-build-${{ env.python_version }}-
-            ${{ runner.os }}-
-
-      - run: poetry install
+      - run: |
+          uv python pin ${{ env.python_version }}
+          uv sync
 
       - name: Build
-        # I use poetry just as a package manager, so this is not `poetry build`
-        run: poetry run poe build
+        run: uv build
 
       - name: Publish distribution to Test PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
