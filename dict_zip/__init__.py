@@ -17,6 +17,22 @@ Example:
 from ._version import __version__
 from .dict_zip import dict_zip
 from .dict_zip_longest import dict_zip_longest
+from .dict_map import (
+    map_keys,
+    map_values,
+    map_items,
+)
+from .tuple_keys import tuple_keys
 
 
-__all__ = ["dict_zip", "dict_zip_longest", "__version__"]
+__all__ = [
+    "dict_zip",
+    "dict_zip_longest",
+    "map_keys",
+    "map_values",
+    "map_items",
+    "map_keys_first",
+    "map_keys_last",
+    "tuple_keys",
+    "__version__",
+]
