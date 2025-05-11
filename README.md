@@ -37,6 +37,32 @@ It fills with fillvalue (default: `None`) when argument dict doesn't have match 
 {'a': (1, 3), 'b': (2, 4), 'c': (4, None)}
 ```
 
+## map_keys, map_values, map_items
+
+`map_keys`, `map_values`, and `map_items` are used to map keys, values, and items of dict.
+
+```python
+>>> from dict_zip import map_keys
+>>> map_keys({'a': 1, 'b': 2}, str.upper)
+{'A': 1, 'B': 2}
+>>> from dict_zip import map_values
+>>> map_values({'a': 1, 'b': 2}, str)
+{'a': '1', 'b': '2'}
+>>> from dict_zip import map_items
+>>> map_items({'a': 1, 'b': 2}, str.upper, str)
+{'A': '1', 'B': '2'}
+```
+
+## tuple_keys
+
+`tuple_keys` is used to convert dict keys to tuple.
+
+```python
+>>> from dict_zip import tuple_keys
+>>> tuple_keys({'a': 1, 'b': 2})
+{('a',): 1, ('b',): 2}
+```
+
 # Type hints
 
 dict_zip supports for type hints.
