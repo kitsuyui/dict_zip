@@ -52,7 +52,6 @@ local_scheme = "no-local-version"
 [tool.poe.tasks]
 test = "pytest"
 coverage-xml = "pytest --cov=dict_zip --doctest-modules --cov-report=xml"
-generate-type-stubs = { shell = "python generate_type_stub.py > dict_zip/__init__.pyi" }
 format = "ruff format dict_zip tests"
 check = [
     { cmd = "ruff check dict_zip tests" },
