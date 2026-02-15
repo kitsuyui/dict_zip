@@ -4,7 +4,7 @@ zip and zip_longest for dict.
 
 [![Python](https://img.shields.io/pypi/pyversions/dict-zip.svg)](https://badge.fury.io/py/dict-zip)
 [![PyPI version](https://img.shields.io/pypi/v/dict-zip.svg)](https://pypi.python.org/pypi/dict-zip/)
-[![codecov](https://codecov.io/gh/kitsuyui/dict_zip/branch/main/graph/badge.svg?token=LiuhQeZsnc)](https://codecov.io/gh/kitsuyui/dict_zip)
+![Coverage](https://raw.githubusercontent.com/kitsuyui/octocov-central/main/badges/kitsuyui/dict_zip/coverage.svg)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![dict-zip](https://snyk.io/advisor/python/dict-zip/badge.svg)](https://snyk.io/advisor/python/dict-zip)
 
