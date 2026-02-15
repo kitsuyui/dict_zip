@@ -1,0 +1,39 @@
+name: octocov
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+
+jobs:
+  octocov:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Enable caching
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Test
+        run: uv run poe test
+
+      - name: Coverage
+        run: uv run poe coverage-xml
+
+      # See also: https://github.com/k1LoW/octocov-action
+      - name: Report coverage with octocov
+        uses: k1LoW/octocov-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          config: .octocov.yml
