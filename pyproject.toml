@@ -36,6 +36,12 @@ dev = [
 [tool.ruff]
 line-length = 79
 
+[tool.uv]
+# Source of truth:
+# https://github.com/kitsuyui/kitsuyui/wiki/Official-Information-for-Dependency-Update-Policies
+# PyPI policy in this repo uses a 2 day quarantine window.
+exclude-newer = "2 days"
+
 [build-system]
 requires = ["setuptools", "setuptools_scm"]
 build-backend = "setuptools.build_meta"
