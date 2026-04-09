@@ -1,4 +1,5 @@
-"""
+"""Zip dictionaries by the union of their keys.
+
 Example:
     >>> from dict_zip import dict_zip_longest
     >>> dict_zip_longest({'a': 1, 'b': 2, 'c': 4}, {'a': 3, 'b': 4})
@@ -6,8 +7,9 @@ Example:
 """
 
 from __future__ import annotations
-from typing import TypeVar, overload, Iterable
 
+from collections.abc import Iterable
+from typing import Any, TypeVar, overload
 
 _K = TypeVar("_K")
 _Fill = TypeVar("_Fill")
@@ -26,11 +28,11 @@ _T9 = TypeVar("_T9")
 def dict_zip_longest(dict1: dict[_K, _T1]) -> dict[_K, tuple[_T1 | None]]: ...
 @overload
 def dict_zip_longest(
-    dict1: dict[_K, _T1], *, fillvalue: _Fill | None = None
+    dict1: dict[_K, _T1], *, fillvalue: _Fill | None = None,
 ) -> dict[_K, tuple[_T1 | _Fill]]: ...
 @overload
 def dict_zip_longest(
-    dict1: dict[_K, _T1], dict2: dict[_K, _T2]
+    dict1: dict[_K, _T1], dict2: dict[_K, _T2],
 ) -> dict[_K, tuple[_T1 | None, _T2 | None]]: ...
 @overload
 def dict_zip_longest(
@@ -41,7 +43,7 @@ def dict_zip_longest(
 ) -> dict[_K, tuple[_T1 | _Fill, _T2 | _Fill]]: ...
 @overload
 def dict_zip_longest(
-    dict1: dict[_K, _T1], dict2: dict[_K, _T2], dict3: dict[_K, _T3]
+    dict1: dict[_K, _T1], dict2: dict[_K, _T2], dict3: dict[_K, _T3],
 ) -> dict[_K, tuple[_T1 | None, _T2 | None, _T3 | None]]: ...
 @overload
 def dict_zip_longest(
@@ -75,7 +77,7 @@ def dict_zip_longest(
     dict4: dict[_K, _T4],
     dict5: dict[_K, _T5],
 ) -> dict[
-    _K, tuple[_T1 | None, _T2 | None, _T3 | None, _T4 | None, _T5 | None]
+    _K, tuple[_T1 | None, _T2 | None, _T3 | None, _T4 | None, _T5 | None],
 ]: ...
 @overload
 def dict_zip_longest(
@@ -87,7 +89,7 @@ def dict_zip_longest(
     *,
     fillvalue: _Fill | None = None,
 ) -> dict[
-    _K, tuple[_T1 | _Fill, _T2 | _Fill, _T3 | _Fill, _T4 | _Fill, _T5 | _Fill]
+    _K, tuple[_T1 | _Fill, _T2 | _Fill, _T3 | _Fill, _T4 | _Fill, _T5 | _Fill],
 ]: ...
 @overload
 def dict_zip_longest(
@@ -100,7 +102,7 @@ def dict_zip_longest(
 ) -> dict[
     _K,
     tuple[
-        _T1 | None, _T2 | None, _T3 | None, _T4 | None, _T5 | None, _T6 | None
+        _T1 | None, _T2 | None, _T3 | None, _T4 | None, _T5 | None, _T6 | None,
     ],
 ]: ...
 @overload
@@ -271,19 +273,17 @@ def dict_zip_longest(
 
 
 def dict_zip_longest(*dictionaries, fillvalue=None):  # type: ignore[no-untyped-def]
-    """Returns a new dictionary \
-concatenated with the dictionaries specified in the argument.
+    """Return a dictionary zipped by the union of keys.
 
     The keys are the union set of the dictionaries.
-    The value is a tuple of the values of the dictionaries.
-    If the specified dictionary does not have the key, \
-it is filled with fillvalue (default: None).
+    The value is a tuple with one value from each dictionary.
+    Missing keys are filled with ``fillvalue`` (default: ``None``).
 
     >>> dict_zip_longest({'a': 1, 'b': 2, 'c': 4}, {'a': 3, 'b': 4})
     {'a': (1, 3), 'b': (2, 4), 'c': (4, None)}
     """
     all_keys = __all_keys(d.keys() for d in dictionaries)
-    return_dic = {key: tuple() for key in all_keys}  # type: ignore[var-annotated]
+    return_dic: dict[Any, tuple[Any, ...]] = dict.fromkeys(all_keys, ())
 
     for dic in dictionaries:
         for key in all_keys:

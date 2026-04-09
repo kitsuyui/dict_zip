@@ -1,4 +1,4 @@
-"""dict_zip
+"""dict_zip.
 
 This module provides a function that concatenates dictionaries.
 Like the zip function for lists, it concatenates dictionaries.
@@ -15,24 +15,23 @@ Example:
 
 # https://packaging-guide.openastronomy.org/en/latest/advanced/versioning.html
 from ._version import __version__
-from .dict_zip import dict_zip
-from .dict_zip_longest import dict_zip_longest
 from .dict_map import (
+    map_items,
     map_keys,
     map_values,
-    map_items,
 )
+from .dict_zip import dict_zip
+from .dict_zip_longest import dict_zip_longest
 from .tuple_keys import tuple_keys
 
-
 __all__ = [
+    "__version__",
     "dict_zip",
     "dict_zip_longest",
-    "map_keys",
-    "map_values",
     "map_items",
+    "map_keys",
     "map_keys_first",
     "map_keys_last",
+    "map_values",
     "tuple_keys",
-    "__version__",
 ]

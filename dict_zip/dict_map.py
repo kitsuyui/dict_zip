@@ -1,5 +1,9 @@
+"""Helpers for transforming dictionary keys and values."""
+
 from __future__ import annotations
-from typing import TypeVar, Callable
+
+from collections.abc import Callable
+from typing import TypeVar
 
 K = TypeVar("K")
 V = TypeVar("V")
@@ -9,11 +13,14 @@ T = TypeVar("T")
 
 def map_keys(dic: dict[K, V], func: Callable[[K], U]) -> dict[U, V]:
     """Apply a function to the keys of a dictionary.
+
     Args:
         dic: The dictionary to map.
         func: The function to apply to the keys.
+
     Returns:
-        A new dictionary with the same values but with the keys transformed by the function.
+        A new dictionary with the same values and transformed keys.
+
     Example:
         >>> from dict_zip import map_keys
         >>> map_keys({'a': 1, 'b': 2}, str.upper)
@@ -28,11 +35,14 @@ def map_keys(dic: dict[K, V], func: Callable[[K], U]) -> dict[U, V]:
 
 def map_values(dic: dict[K, V], func: Callable[[V], U]) -> dict[K, U]:
     """Apply a function to the values of a dictionary.
+
     Args:
         dic: The dictionary to map.
         func: The function to apply to the values.
+
     Returns:
-        A new dictionary with the same keys but with the values transformed by the function.
+        A new dictionary with the same keys and transformed values.
+
     Example:
         >>> from dict_zip import map_values
         >>> map_values({'a': 1, 'b': 2}, str)
@@ -51,12 +61,15 @@ def map_items(
     value_func: Callable[[V], T],
 ) -> dict[U, T]:
     """Apply a function to the keys and values of a dictionary.
+
     Args:
         dic: The dictionary to map.
         key_func: The function to apply to the keys.
         value_func: The function to apply to the values.
+
     Returns:
         A new dictionary with the keys and values transformed by the functions.
+
     Example:
         >>> from dict_zip import map_items
         >>> map_items({'a': 1, 'b': 2}, str.upper, str)
@@ -71,14 +84,15 @@ def map_items(
     for original_key, new_key, _ in items:
         if new_key in keys:
             raise KeyError(
-                f"Duplicate mapped key: {new_key} from original key: {original_key}"
+                "Duplicate mapped key: "
+                f"{new_key} from original key: {original_key}",
             )
         keys.add(new_key)
     return {new_key: value for _, new_key, value in items}
 
 
 __all__ = [
+    "map_items",
     "map_keys",
     "map_values",
-    "map_items",
 ]
