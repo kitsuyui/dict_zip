@@ -36,6 +36,37 @@ dev = [
 [tool.ruff]
 line-length = 79
 
+[tool.ruff.lint]
+select = [
+    "A",
+    "ANN",
+    "B",
+    "C4",
+    "COM",
+    "D",
+    "E",
+    "F",
+    "I",
+    "PLE",
+    "RUF",
+    "S",
+    "UP",
+    "W",
+]
+ignore = [
+    "D203",
+    "D213",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = [
+    "D",
+    "S101",
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
 [tool.uv]
 # Source of truth:
 # https://github.com/kitsuyui/kitsuyui/wiki/Official-Information-for-Dependency-Update-Policies

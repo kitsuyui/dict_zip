@@ -1,9 +1,9 @@
 import pytest
 
 from dict_zip import (
+    map_items,
     map_keys,
     map_values,
-    map_items,
 )
 
 
@@ -49,7 +49,7 @@ def test_map_items() -> None:
         "b!": 4,
     }
     assert map_items(
-        {("a", "b"): 1, ("c", "d"): 2}, lambda x: "".join(x), lambda x: x * 2
+        {("a", "b"): 1, ("c", "d"): 2}, lambda x: "".join(x), lambda x: x * 2,
     ) == {"ab": 2, "cd": 4}
 
     # empty dictionary
