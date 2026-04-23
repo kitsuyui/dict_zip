@@ -104,13 +104,13 @@ def dict_zip(*dictionaries):  # type: ignore[no-untyped-def]
     common_keys = functools.reduce(
         lambda x, y: x & y, (set(d.keys()) for d in dictionaries),
     )
-    return_dic = {}  # type: ignore[var-annotated]
-    for dic in dictionaries:
-        for key, val in dic.items():
-            if key in common_keys:
-                return_dic.setdefault(key, []).append(val)
-
-    return {key: tuple(val) for key, val in return_dic.items()}
+    ordered_common_keys = [
+        key for key in dictionaries[0] if key in common_keys
+    ]
+    return {
+        key: tuple(dictionary[key] for dictionary in dictionaries)
+        for key in ordered_common_keys
+    }
 
 
 __all__ = ["dict_zip"]

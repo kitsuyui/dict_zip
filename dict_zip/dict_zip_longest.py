@@ -9,7 +9,8 @@ Example:
 from __future__ import annotations
 
 from collections.abc import Iterable
-from typing import Any, TypeVar, overload
+from itertools import chain
+from typing import TypeVar, overload
 
 _K = TypeVar("_K")
 _Fill = TypeVar("_Fill")
@@ -283,23 +284,16 @@ def dict_zip_longest(*dictionaries, fillvalue=None):  # type: ignore[no-untyped-
     {'a': (1, 3), 'b': (2, 4), 'c': (4, None)}
     """
     all_keys = __all_keys(d.keys() for d in dictionaries)
-    return_dic: dict[Any, tuple[Any, ...]] = dict.fromkeys(all_keys, ())
-
-    for dic in dictionaries:
-        for key in all_keys:
-            return_dic[key] += (dic.get(key, fillvalue),)
-
-    return return_dic
+    return {
+        key: tuple(
+            dictionary.get(key, fillvalue) for dictionary in dictionaries
+        )
+        for key in all_keys
+    }
 
 
 def __all_keys(iterables: Iterable[Iterable[_K]]) -> list[_K]:
-    keys = []
-    for iterable in iterables:
-        for key in iterable:
-            if key in keys:
-                continue
-            keys.append(key)
-    return keys
+    return list(dict.fromkeys(chain.from_iterable(iterables)))
 
 
 __all__ = ["dict_zip_longest"]
