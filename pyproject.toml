@@ -72,7 +72,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.mccabe]
-max-complexity = 4
+max-complexity = 3
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
