@@ -71,6 +71,9 @@ ignore = [
     "S101",
 ]
 
+[tool.ruff.lint.mccabe]
+max-complexity = 4
+
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
