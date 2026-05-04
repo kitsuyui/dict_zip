@@ -24,6 +24,8 @@ _T9 = TypeVar("_T9")
 
 
 @overload
+def dict_zip() -> dict[object, tuple[()]]: ...
+@overload
 def dict_zip(dict1: dict[_K, _T1]) -> dict[_K, tuple[_T1]]: ...
 @overload
 def dict_zip(
@@ -101,6 +103,9 @@ def dict_zip(*dictionaries):  # type: ignore[no-untyped-def]
     >>> dict_zip({'a': 1, 'b': 2}, {'a': 3, 'b': 4})
     {'a': (1, 3), 'b': (2, 4)}
     """
+    if not dictionaries:
+        return {}
+
     common_keys = functools.reduce(
         lambda x, y: x & y, (set(d.keys()) for d in dictionaries),
     )

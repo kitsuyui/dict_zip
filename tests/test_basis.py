@@ -1,6 +1,10 @@
 from dict_zip import dict_zip, dict_zip_longest
 
 
+def test_dict_zip_without_dictionaries() -> None:
+    assert dict_zip() == {}
+
+
 def test_basis() -> None:
     d1 = {"a": 1, "b": 2, "c": 3}
     d2 = {"a": 4, "b": 5}
