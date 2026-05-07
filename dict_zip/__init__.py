@@ -30,8 +30,6 @@ __all__ = [
     "dict_zip_longest",
     "map_items",
     "map_keys",
-    "map_keys_first",
-    "map_keys_last",
     "map_values",
     "tuple_keys",
 ]
