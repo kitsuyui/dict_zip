@@ -11,4 +11,4 @@ permissions:
 
 jobs:
   update-gitignore:
-    uses: kitsuyui/gh-actions-workflows/.github/workflows/gitignore-in.yml@main
+    uses: kitsuyui/gh-actions-workflows/.github/workflows/gitignore-in.yml@0b691527a4dde052c79eae22706131a7726a2bba
