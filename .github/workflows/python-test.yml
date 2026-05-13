@@ -31,6 +31,7 @@ jobs:
         uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7
         with:
           enable-cache: true
+          python-version: ${{ matrix.python }}
 
       - name: Install dependencies
         run: uv sync
@@ -41,8 +42,8 @@ jobs:
       - name: Check Python version
         run: |
           actual_version=$(uv run python --version)
-          expected_version="Python ${{ matrix.python }}"
-          if [ "$actual_version" == *"$expected_version"* ]; then
+          expected_version="${{ matrix.python }}"
+          if [[ "$actual_version" != *"$expected_version"* ]]; then
             echo "Expected $expected_version, but got $actual_version"
             exit 1
           fi
