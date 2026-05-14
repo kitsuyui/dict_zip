@@ -75,20 +75,19 @@ def map_items(
         >>> map_items({'a': 1, 'b': 2}, str.upper, str)
         {'A': '1', 'B': '2'}
     """
-    items = [
-        (original_key, key_func(original_key), value_func(value))
-        for original_key, value in dic.items()
-    ]
     # duplicate keys are not allowed in a dictionary
-    keys = set()
-    for original_key, new_key, _ in items:
+    keys: set[U] = set()
+    result: dict[U, T] = {}
+    for original_key, value in dic.items():
+        new_key = key_func(original_key)
         if new_key in keys:
             raise KeyError(
                 "Duplicate mapped key: "
                 f"{new_key} from original key: {original_key}",
             )
         keys.add(new_key)
-    return {new_key: value for _, new_key, value in items}
+        result[new_key] = value_func(value)
+    return result
 
 
 __all__ = [

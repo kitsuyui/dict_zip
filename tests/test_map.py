@@ -49,7 +49,9 @@ def test_map_items() -> None:
         "b!": 4,
     }
     assert map_items(
-        {("a", "b"): 1, ("c", "d"): 2}, lambda x: "".join(x), lambda x: x * 2,
+        {("a", "b"): 1, ("c", "d"): 2},
+        lambda x: "".join(x),
+        lambda x: x * 2,
     ) == {"ab": 2, "cd": 4}
 
     # empty dictionary
@@ -60,3 +62,16 @@ def test_map_items() -> None:
     # duplicate keys
     with pytest.raises(KeyError):
         map_items({"a1": 1, "a2": 2}, lambda x: x[0], lambda x: x * 2)
+
+
+def test_map_items_checks_duplicate_keys_before_mapping_values() -> None:
+    mapped_values: list[int] = []
+
+    def map_value(value: int) -> int:
+        mapped_values.append(value)
+        return value * 2
+
+    with pytest.raises(KeyError):
+        map_items({"a1": 1, "a2": 2}, lambda key: key[0], map_value)
+
+    assert mapped_values == [1]
