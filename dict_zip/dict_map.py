@@ -21,6 +21,10 @@ def map_keys(dic: dict[K, V], func: Callable[[K], U]) -> dict[U, V]:
     Returns:
         A new dictionary with the same values and transformed keys.
 
+    Raises:
+        KeyError: If two different keys in ``dic`` are mapped to the same key
+            by ``func``.
+
     Example:
         >>> from dict_zip import map_keys
         >>> map_keys({'a': 1, 'b': 2}, str.upper)
@@ -69,6 +73,10 @@ def map_items(
 
     Returns:
         A new dictionary with the keys and values transformed by the functions.
+
+    Raises:
+        KeyError: If ``key_func`` maps two different keys in ``dic`` to the
+            same key.
 
     Example:
         >>> from dict_zip import map_items

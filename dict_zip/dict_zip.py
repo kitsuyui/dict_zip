@@ -29,11 +29,14 @@ def dict_zip() -> dict[object, tuple[()]]: ...
 def dict_zip(dict1: dict[_K, _T1]) -> dict[_K, tuple[_T1]]: ...
 @overload
 def dict_zip(
-    dict1: dict[_K, _T1], dict2: dict[_K, _T2],
+    dict1: dict[_K, _T1],
+    dict2: dict[_K, _T2],
 ) -> dict[_K, tuple[_T1, _T2]]: ...
 @overload
 def dict_zip(
-    dict1: dict[_K, _T1], dict2: dict[_K, _T2], dict3: dict[_K, _T3],
+    dict1: dict[_K, _T1],
+    dict2: dict[_K, _T2],
+    dict3: dict[_K, _T3],
 ) -> dict[_K, tuple[_T1, _T2, _T3]]: ...
 @overload
 def dict_zip(
@@ -107,7 +110,8 @@ def dict_zip(*dictionaries):  # type: ignore[no-untyped-def]
         return {}
 
     common_keys = functools.reduce(
-        lambda x, y: x & y, (set(d.keys()) for d in dictionaries),
+        lambda x, y: x & y,
+        (set(d.keys()) for d in dictionaries),
     )
     ordered_common_keys = [
         key for key in dictionaries[0] if key in common_keys
