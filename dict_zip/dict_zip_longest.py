@@ -280,6 +280,19 @@ def dict_zip_longest(*dictionaries, fillvalue=None):  # type: ignore[no-untyped-
     The value is a tuple with one value from each dictionary.
     Missing keys are filled with ``fillvalue`` (default: ``None``).
 
+    .. note::
+        When dictionary values can legitimately be ``None``, the default
+        ``fillvalue=None`` makes it impossible to distinguish a missing key
+        from a real ``None`` value in the output tuple.  Use a sentinel
+        object as ``fillvalue`` to tell them apart::
+
+            _MISSING = object()
+            result = dict_zip_longest(d1, d2, fillvalue=_MISSING)
+            # value is _MISSING  →  key was absent
+            # value is None      →  key was present with value None
+
+        This matches the behaviour of :func:`itertools.zip_longest`.
+
     >>> dict_zip_longest({'a': 1, 'b': 2, 'c': 4}, {'a': 3, 'b': 4})
     {'a': (1, 3), 'b': (2, 4), 'c': (4, None)}
     """
