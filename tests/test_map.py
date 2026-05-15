@@ -1,3 +1,5 @@
+from typing import Any, cast
+
 import pytest
 
 from dict_zip import (
@@ -62,6 +64,34 @@ def test_map_items() -> None:
     # duplicate keys
     with pytest.raises(KeyError):
         map_items({"a1": 1, "a2": 2}, lambda x: x[0], lambda x: x * 2)
+
+
+def test_map_items_accepts_func_alias_for_key_func() -> None:
+    d = {"a": 1, "b": 2}
+
+    assert map_items(d, func=str.upper, value_func=str) == {
+        "A": "1",
+        "B": "2",
+    }
+
+
+def test_map_items_rejects_ambiguous_key_function_alias() -> None:
+    d = {"a": 1, "b": 2}
+    unchecked_map_items = cast(Any, map_items)
+
+    with pytest.raises(TypeError, match="both 'key_func' and 'func'"):
+        unchecked_map_items(d, str.upper, str, func=str.lower)
+
+
+def test_map_items_rejects_missing_key_function() -> None:
+    d = {"a": 1, "b": 2}
+    unchecked_map_items = cast(Any, map_items)
+
+    with pytest.raises(
+        TypeError,
+        match="missing required argument: 'key_func'",
+    ):
+        unchecked_map_items(d, value_func=str)
 
 
 def test_map_items_checks_duplicate_keys_before_mapping_values() -> None:
