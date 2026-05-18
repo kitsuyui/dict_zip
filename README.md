@@ -53,6 +53,10 @@ It fills with fillvalue (default: `None`) when argument dict doesn't have match 
 {'A': '1', 'B': '2'}
 ```
 
+`map_items` accepts the key mapper as the second positional argument. The
+keyword-only `func=` argument is kept as a backward-compatible alias for
+`key_func`.
+
 ## tuple_keys
 
 `tuple_keys` is used to convert dict keys to tuple.
