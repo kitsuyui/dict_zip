@@ -75,6 +75,10 @@ def test_map_items_accepts_func_alias_for_key_func() -> None:
     }
 
 
+def test_map_items_value_func_annotation_hides_internal_sentinel() -> None:
+    assert "object" not in map_items.__annotations__["value_func"]
+
+
 def test_map_items_rejects_ambiguous_key_function_alias() -> None:
     d = {"a": 1, "b": 2}
     unchecked_map_items = cast(Any, map_items)

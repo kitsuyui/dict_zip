@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-from typing import TypeVar, cast, overload
+from typing import NoReturn, TypeVar, cast, overload
 
 K = TypeVar("K")
 V = TypeVar("V")
@@ -12,6 +12,7 @@ T = TypeVar("T")
 
 
 _MISSING = object()
+_MISSING_VALUE_FUNC = cast("Callable[[object], NoReturn]", _MISSING)
 
 
 def _resolve_key_mapper(
@@ -31,11 +32,11 @@ def _resolve_key_mapper(
 
 
 def _resolve_value_mapper(
-    value_func: Callable[[V], T] | object,
+    value_func: Callable[[V], T],
 ) -> Callable[[V], T]:
     if value_func is _MISSING:
         raise TypeError("map_items() missing required argument: 'value_func'")
-    return cast("Callable[[V], T]", value_func)
+    return value_func
 
 
 def map_keys(dic: dict[K, V], func: Callable[[K], U]) -> dict[U, V]:
@@ -107,7 +108,7 @@ def map_items(
 def map_items(
     dic: dict[K, V],
     key_func: Callable[[K], U] | None = None,
-    value_func: Callable[[V], T] | object = _MISSING,
+    value_func: Callable[[V], T] = _MISSING_VALUE_FUNC,
     *,
     func: Callable[[K], U] | None = None,
 ) -> dict[U, T]:
@@ -115,9 +116,10 @@ def map_items(
 
     Args:
         dic: The dictionary to map.
-        key_func: The function to apply to the keys.
+        key_func: The function to apply to the keys. Prefer this positional
+            argument for new code.
         value_func: The function to apply to the values.
-        func: Alias for key_func.
+        func: Backward-compatible keyword-only alias for ``key_func``.
 
     Returns:
         A new dictionary with the keys and values transformed by the functions.
