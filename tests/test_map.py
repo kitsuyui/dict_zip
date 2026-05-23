@@ -24,7 +24,7 @@ def test_map_keys() -> None:
     assert map_keys(d2, lambda x: x + "!") == {}
 
     # duplicate keys
-    with pytest.raises(KeyError):
+    with pytest.raises(ValueError, match="Duplicate mapped key: a"):
         map_keys({"a1": 1, "a2": 2}, lambda x: x[0])
 
 
@@ -62,7 +62,7 @@ def test_map_items() -> None:
     assert map_items(d2, lambda x: x + "!", lambda x: x * 2) == {}
 
     # duplicate keys
-    with pytest.raises(KeyError):
+    with pytest.raises(ValueError, match="Duplicate mapped key: a"):
         map_items({"a1": 1, "a2": 2}, lambda x: x[0], lambda x: x * 2)
 
 
@@ -105,7 +105,7 @@ def test_map_items_checks_duplicate_keys_before_mapping_values() -> None:
         mapped_values.append(value)
         return value * 2
 
-    with pytest.raises(KeyError):
+    with pytest.raises(ValueError, match="Duplicate mapped key: a"):
         map_items({"a1": 1, "a2": 2}, lambda key: key[0], map_value)
 
     assert mapped_values == [1]
