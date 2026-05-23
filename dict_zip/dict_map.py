@@ -50,7 +50,7 @@ def map_keys(dic: dict[K, V], func: Callable[[K], U]) -> dict[U, V]:
         A new dictionary with the same values and transformed keys.
 
     Raises:
-        KeyError: If two different keys in ``dic`` are mapped to the same key
+        ValueError: If two different keys in ``dic`` are mapped to the same key
             by ``func``.
 
     Example:
@@ -125,7 +125,7 @@ def map_items(
         A new dictionary with the keys and values transformed by the functions.
 
     Raises:
-        KeyError: If ``key_func`` maps two different keys in ``dic`` to the
+        ValueError: If ``key_func`` maps two different keys in ``dic`` to the
             same key.
 
     Example:
@@ -143,7 +143,7 @@ def map_items(
     for original_key, value in dic.items():
         new_key = key_mapper(original_key)
         if new_key in keys:
-            raise KeyError(
+            raise ValueError(
                 "Duplicate mapped key: "
                 f"{new_key} from original key: {original_key}",
             )
