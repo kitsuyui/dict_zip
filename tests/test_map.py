@@ -98,6 +98,11 @@ def test_map_items_rejects_missing_key_function() -> None:
         unchecked_map_items(d, value_func=str)
 
 
+def test_map_items_duplicate_key_error_includes_both_original_keys() -> None:
+    with pytest.raises(ValueError, match=r"'a1'.*'a2'|'a2'.*'a1'"):
+        map_keys({"a1": 1, "a2": 2}, lambda x: x[0])
+
+
 def test_map_items_checks_duplicate_keys_before_mapping_values() -> None:
     mapped_values: list[int] = []
 
