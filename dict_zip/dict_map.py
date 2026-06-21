@@ -137,17 +137,18 @@ def map_items(
     """
     key_mapper = _resolve_key_mapper(key_func, func)
     value_mapper: Callable[[V], T] = _resolve_value_mapper(value_func)
-    # duplicate keys are not allowed in a dictionary
-    keys: set[U] = set()
+    key_origins: dict[U, K] = {}
     result: dict[U, T] = {}
     for original_key, value in dic.items():
         new_key = key_mapper(original_key)
-        if new_key in keys:
+        if new_key in key_origins:
+            first_key = key_origins[new_key]
             raise ValueError(
-                "Duplicate mapped key: "
-                f"{new_key} from original key: {original_key}",
+                f"Duplicate mapped key: {new_key}"
+                f" from original keys: {first_key!r}"
+                f" and {original_key!r}",
             )
-        keys.add(new_key)
+        key_origins[new_key] = original_key
         result[new_key] = value_mapper(value)
     return result
 
