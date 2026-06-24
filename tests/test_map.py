@@ -98,6 +98,33 @@ def test_map_items_rejects_missing_key_function() -> None:
         unchecked_map_items(d, value_func=str)
 
 
+def test_map_items_rejects_non_callable_key_func() -> None:
+    unchecked_map_items = cast(Any, map_items)
+
+    with pytest.raises(
+        TypeError,
+        match="argument 'key_func' must be callable",
+    ):
+        unchecked_map_items({"a": 1}, 0, str)
+
+
+def test_map_items_rejects_non_callable_func_alias() -> None:
+    unchecked_map_items = cast(Any, map_items)
+
+    with pytest.raises(TypeError, match="argument 'func' must be callable"):
+        unchecked_map_items({"a": 1}, func=0, value_func=str)
+
+
+def test_map_items_rejects_non_callable_value_func() -> None:
+    unchecked_map_items = cast(Any, map_items)
+
+    with pytest.raises(
+        TypeError,
+        match="argument 'value_func' must be callable",
+    ):
+        unchecked_map_items({"a": 1}, str.upper, None)
+
+
 def test_map_items_duplicate_key_error_includes_both_original_keys() -> None:
     with pytest.raises(ValueError, match=r"'a1'.*'a2'|'a2'.*'a1'"):
         map_keys({"a1": 1, "a2": 2}, lambda x: x[0])
