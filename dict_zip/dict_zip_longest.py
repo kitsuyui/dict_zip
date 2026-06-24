@@ -26,6 +26,11 @@ _T9 = TypeVar("_T9")
 
 
 @overload
+def dict_zip_longest(
+    *,
+    fillvalue: object | None = None,
+) -> dict[object, tuple[()]]: ...
+@overload
 def dict_zip_longest(dict1: dict[_K, _T1]) -> dict[_K, tuple[_T1 | None]]: ...
 @overload
 def dict_zip_longest(
