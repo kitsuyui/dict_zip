@@ -4,6 +4,8 @@ Example:
     >>> from dict_zip import dict_zip_longest
     >>> dict_zip_longest({'a': 1, 'b': 2, 'c': 4}, {'a': 3, 'b': 4})
     {'a': (1, 3), 'b': (2, 4), 'c': (4, None)}
+
+Result keys keep first-seen insertion order across the input dictionaries.
 """
 
 from __future__ import annotations
@@ -291,6 +293,8 @@ def dict_zip_longest(*dictionaries, fillvalue=None):  # type: ignore[no-untyped-
     The keys are the union set of the dictionaries.
     The value is a tuple with one value from each dictionary.
     Missing keys are filled with ``fillvalue`` (default: ``None``).
+    Result keys keep first-seen insertion order across the input
+    dictionaries.
 
     .. note::
         When dictionary values can legitimately be ``None``, the default
@@ -318,6 +322,7 @@ def dict_zip_longest(*dictionaries, fillvalue=None):  # type: ignore[no-untyped-
 
 
 def __all_keys(iterables: Iterable[Iterable[_K]]) -> list[_K]:
+    # ``dict.fromkeys`` preserves first-seen order while removing duplicates.
     return list(dict.fromkeys(chain.from_iterable(iterables)))
 
 

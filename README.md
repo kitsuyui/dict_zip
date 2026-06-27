@@ -19,6 +19,8 @@ $ pip install dict-zip
 ## dict_zip
 
 `dict_zip` is `zip` for dict.
+The result keeps the first dictionary's insertion order and skips keys
+missing from any dictionary.
 
 ```python
 >>> from dict_zip import dict_zip
@@ -30,6 +32,8 @@ $ pip install dict-zip
 
 `dict_zip_longest` is `zip_longest` for dict.
 It fills with fillvalue (default: `None`) when argument dict doesn't have match key.
+The result keeps keys in the order they are first seen while scanning the
+input dictionaries from left to right.
 
 ```python
 >>> from dict_zip import dict_zip_longest
