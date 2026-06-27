@@ -5,6 +5,11 @@ def test_dict_zip_without_dictionaries() -> None:
     assert dict_zip() == {}
 
 
+def test_dict_zip_longest_without_dictionaries() -> None:
+    assert dict_zip_longest() == {}
+    assert dict_zip_longest(fillvalue=10) == {}
+
+
 def test_basis() -> None:
     d1 = {"a": 1, "b": 2, "c": 3}
     d2 = {"a": 4, "b": 5}
