@@ -113,15 +113,14 @@ def dict_zip(*dictionaries):  # type: ignore[no-untyped-def]
     if not dictionaries:
         return {}
 
-    common_key_set = functools.reduce(
+    snapshots = [dict(d) for d in dictionaries]
+    common_keys = functools.reduce(
         lambda x, y: x & y,
-        (set(d.keys()) for d in dictionaries),
+        (set(s.keys()) for s in snapshots),
     )
-    ordered_common_keys = [
-        key for key in dictionaries[0] if key in common_key_set
-    ]
+    ordered_common_keys = [key for key in snapshots[0] if key in common_keys]
     return {
-        key: tuple(dictionary[key] for dictionary in dictionaries)
+        key: tuple(snapshot[key] for snapshot in snapshots)
         for key in ordered_common_keys
     }
 
