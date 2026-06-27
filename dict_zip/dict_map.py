@@ -15,15 +15,26 @@ _MISSING = object()
 _MISSING_VALUE_FUNC = cast("Callable[[object], NoReturn]", _MISSING)
 
 
+def _require_callable(mapper: object, argument_name: str) -> None:
+    if not callable(mapper):
+        raise TypeError(
+            f"map_items() argument '{argument_name}' must be callable",
+        )
+
+
 def _resolve_key_mapper(
     key_func: Callable[[K], U] | None,
     func: Callable[[K], U] | None,
 ) -> Callable[[K], U]:
     mappers = tuple(
-        mapper for mapper in (key_func, func) if mapper is not None
+        (argument_name, mapper)
+        for argument_name, mapper in (("key_func", key_func), ("func", func))
+        if mapper is not None
     )
     if len(mappers) == 1:
-        return mappers[0]
+        argument_name, mapper = mappers[0]
+        _require_callable(mapper, argument_name)
+        return mapper
     raise TypeError(
         "map_items() missing required argument: 'key_func'"
         if not mappers
@@ -36,6 +47,7 @@ def _resolve_value_mapper(
 ) -> Callable[[V], T]:
     if value_func is _MISSING:
         raise TypeError("map_items() missing required argument: 'value_func'")
+    _require_callable(value_func, "value_func")
     return value_func
 
 
@@ -127,6 +139,7 @@ def map_items(
     Raises:
         ValueError: If ``key_func`` maps two different keys in ``dic`` to the
             same key.
+        TypeError: If a mapper is missing, ambiguous, or not callable.
 
     Example:
         >>> from dict_zip import map_items
