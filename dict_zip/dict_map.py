@@ -126,7 +126,8 @@ def map_items(
 
     Raises:
         ValueError: If ``key_func`` maps two different keys in ``dic`` to the
-            same key.
+            same key. ``value_func`` is **not** called for the value whose
+            mapped key triggered the error.
 
     Example:
         >>> from dict_zip import map_items
