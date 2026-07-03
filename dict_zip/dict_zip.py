@@ -4,6 +4,9 @@ Example:
     >>> from dict_zip import dict_zip
     >>> dict_zip({'a': 1, 'b': 2}, {'a': 3, 'b': 4})
     {'a': (1, 3), 'b': (2, 4)}
+
+Result keys keep the first dictionary's insertion order, filtered to keys
+present in every dictionary.
 """
 
 from __future__ import annotations
@@ -102,6 +105,7 @@ def dict_zip(*dictionaries):  # type: ignore[no-untyped-def]
 
     The key is a common key shared by every dictionary.
     The value is a tuple with one value from each dictionary.
+    Result keys keep the first dictionary's insertion order.
 
     >>> dict_zip({'a': 1, 'b': 2}, {'a': 3, 'b': 4})
     {'a': (1, 3), 'b': (2, 4)}
@@ -109,12 +113,12 @@ def dict_zip(*dictionaries):  # type: ignore[no-untyped-def]
     if not dictionaries:
         return {}
 
-    common_keys = functools.reduce(
+    common_key_set = functools.reduce(
         lambda x, y: x & y,
         (set(d.keys()) for d in dictionaries),
     )
     ordered_common_keys = [
-        key for key in dictionaries[0] if key in common_keys
+        key for key in dictionaries[0] if key in common_key_set
     ]
     return {
         key: tuple(dictionary[key] for dictionary in dictionaries)
